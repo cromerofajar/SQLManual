@@ -274,7 +274,10 @@ public class Navegar extends javax.swing.JFrame {
     }//GEN-LAST:event_BotonAñadirDatosActionPerformed
 
     private void BotonModificarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonModificarDatosActionPerformed
-        Modificar.modificarDatos();
+        String nombre=JOptionPane.showInputDialog(null,"De que tabla desea modificar los datos");
+        int ano=Integer.parseInt(JOptionPane.showInputDialog(null,"Introduce el año del torneo"));
+        Modificar.modificarDatosMV(nombre,ano);
+        Modificar.modificarDatosParti(nombre,ano);
     }//GEN-LAST:event_BotonModificarDatosActionPerformed
 
     private void BotonBorrarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBorrarDatosActionPerformed
