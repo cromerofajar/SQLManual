@@ -111,22 +111,32 @@ public class CrearTablas extends javax.swing.JFrame {
 
     private void AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarActionPerformed
         Navegar obx=new Navegar();
-        String url = "jdbc:sqlite:/home/local/DANIELCASTELAO/cromerofajar/Actividades Programación/Manual/test.db";
+        String url = "jdbc:sqlite:/home/local/DANIELCASTELAO/cromerofajar/Actividades Programación/Manual/campeonato.db";
         String sql = "CREATE TABLE IF NOT EXISTS "+ cuadroTextoNombreTabla.getText()+ "(\n"
                 + "ano integer PRIMARY KEY,\n"
-                + "presidente text NOT NULL,\n"
-                + "partido text\n"
+                + "finalista1 text NOT NULL,\n"
+                + "finalista2 text NOT NULL,\n"
+                + "campeon text"
+                + ");";
+        String sql2 = "CREATE TABLE IF NOT EXISTS "+ cuadroTextoNombreTabla.getText()+"datos "+ "(\n"
+                + "ano integer PRIMARY KEY,\n"
+                + "mvp text NOT NULL,\n"
+                + "usado text NOT NULL\n"
                 + ");";
         try (Connection conn = DriverManager.getConnection(url);
                 Statement stmt = conn.createStatement()) {
             // create a new table
             stmt.execute(sql);
-            System.out.println("Tabla creada");
+            stmt.execute(sql2);
+            JOptionPane.showMessageDialog(null,"Tabla creada");
             obx.setVisible(true);
             this.setVisible(false);
             conn.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            obx.setVisible(true);
+            this.setVisible(false);
+            JOptionPane.showMessageDialog(null, "Error al crear tabla");
         }
     }//GEN-LAST:event_AceptarActionPerformed
 

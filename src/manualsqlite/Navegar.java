@@ -39,7 +39,6 @@ public class Navegar extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         BotonConsulta = new javax.swing.JButton();
-        BotonDesconectar = new javax.swing.JButton();
         BotonCrearTabla = new javax.swing.JButton();
         BotonModificarDatos = new javax.swing.JButton();
         BotonBorrarDatos = new javax.swing.JButton();
@@ -47,22 +46,20 @@ public class Navegar extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TablaDatos = new javax.swing.JTable();
+        TablaDatosParti = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        TablaMVP = new javax.swing.JTable();
+        BotonConsultaJugador = new javax.swing.JButton();
+        ConsultaAno = new javax.swing.JButton();
         BotonMostrarTabla = new javax.swing.JButton();
+        BotonDesconectar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        BotonConsulta.setText("Consulta");
+        BotonConsulta.setText("Consulta finales");
         BotonConsulta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonConsultaActionPerformed(evt);
-            }
-        });
-
-        BotonDesconectar.setText("Salir");
-        BotonDesconectar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BotonDesconectarActionPerformed(evt);
             }
         });
 
@@ -98,21 +95,52 @@ public class Navegar extends javax.swing.JFrame {
 
         jLabel2.setText("Que acción desea realizar?");
 
-        TablaDatos.setModel(new javax.swing.table.DefaultTableModel(
+        TablaDatosParti.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Ano", "Presidente", "Partido"
+                "Ano", "Finalista1", "Finalista2", "Campeon"
             }
         ));
-        TablaDatos.setEnabled(false);
-        jScrollPane1.setViewportView(TablaDatos);
+        TablaDatosParti.setEnabled(false);
+        jScrollPane1.setViewportView(TablaDatosParti);
+
+        TablaMVP.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Ano", "Mejor jugador", "Campeon usado"
+            }
+        ));
+        jScrollPane2.setViewportView(TablaMVP);
+
+        BotonConsultaJugador.setText("Consulta jugador");
+        BotonConsultaJugador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonConsultaJugadorActionPerformed(evt);
+            }
+        });
+
+        ConsultaAno.setText("Consulta por ano");
+        ConsultaAno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConsultaAnoActionPerformed(evt);
+            }
+        });
 
         BotonMostrarTabla.setText("Mostar toda la tabla");
         BotonMostrarTabla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonMostrarTablaActionPerformed(evt);
+            }
+        });
+
+        BotonDesconectar.setText("Salir");
+        BotonDesconectar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonDesconectarActionPerformed(evt);
             }
         });
 
@@ -130,19 +158,22 @@ public class Navegar extends javax.swing.JFrame {
                     .addComponent(BotonBorrarDatos)
                     .addComponent(BotonConsulta)
                     .addComponent(jLabel2)
+                    .addComponent(BotonConsultaJugador)
+                    .addComponent(ConsultaAno)
                     .addComponent(BotonMostrarTabla)
                     .addComponent(BotonDesconectar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 707, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
                         .addComponent(jLabel1)
                         .addGap(7, 7, 7)
                         .addComponent(jLabel2)
@@ -153,21 +184,31 @@ public class Navegar extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(BotonModificarDatos)
                         .addGap(18, 18, 18)
-                        .addComponent(BotonBorrarDatos)
-                        .addGap(18, 18, 18)
+                        .addComponent(BotonBorrarDatos))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(BotonConsulta)
+                        .addGap(18, 18, 18)
+                        .addComponent(BotonConsultaJugador)
+                        .addGap(18, 18, 18)
+                        .addComponent(ConsultaAno)
                         .addGap(18, 18, 18)
                         .addComponent(BotonMostrarTabla)
                         .addGap(18, 18, 18)
-                        .addComponent(BotonDesconectar)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(BotonDesconectar))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 16, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,17 +230,16 @@ public class Navegar extends javax.swing.JFrame {
     private void BotonConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonConsultaActionPerformed
         String nombre=JOptionPane.showInputDialog(null,"Introduzca el nombre de la tabla que desea consultar");
         String condicion=JOptionPane.showInputDialog(null,"Introduzca la condicion de busqueda recuerde que empieza por WHERE en caso de querer consultar todo deje en blanco");
-        String consulta="SELECT ano, presidente,partido FROM \""+nombre+"\" "+condicion;
-        
+        String consulta="SELECT ano, finalista1,finalista2,campeon FROM \""+nombre+"\" "+condicion;
         ArrayList<Object[]> base=new ArrayList<>();
-        
-        TablaDatos.setModel(Consultas.blanco());
-        DefaultTableModel modelo =(DefaultTableModel) TablaDatos.getModel();
-        base=Consultas.select(consulta);
+        TablaDatosParti.setModel(Consultas.blanco());
+        TablaMVP.setModel(Consultas.blanco2());
+        DefaultTableModel modelo =(DefaultTableModel) TablaDatosParti.getModel();
+        base=Consultas.selectFinal(consulta);
         for(Object[] ele:base){
             modelo.addRow(ele);
-        }        
-        TablaDatos.setModel(modelo);
+        }
+        TablaDatosParti.setModel(modelo);
     }//GEN-LAST:event_BotonConsultaActionPerformed
 
     private void BotonCrearTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCrearTablaActionPerformed
@@ -210,14 +250,23 @@ public class Navegar extends javax.swing.JFrame {
 
     private void BotonMostrarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonMostrarTablaActionPerformed
         ArrayList<Object[]> base=new ArrayList<>();
-        
-        TablaDatos.setModel(Consultas.blanco());
-        DefaultTableModel modelo =(DefaultTableModel) TablaDatos.getModel();
-        base=Consultas.selectAll();
+        ArrayList<Object[]> base2=new ArrayList<>();
+        String nombre=JOptionPane.showInputDialog(null,"De que tabla desea mostrar los datos");
+        TablaDatosParti.setModel(Consultas.blanco());
+        TablaMVP.setModel(Consultas.blanco2());
+        DefaultTableModel modelo =(DefaultTableModel) TablaDatosParti.getModel();
+        DefaultTableModel modelo2 =(DefaultTableModel) TablaMVP.getModel();
+        base=Consultas.selectAll(nombre);
+        base2=Consultas.selectAll2(nombre);
         for(Object[] ele:base){
             modelo.addRow(ele);
-        }        
-        TablaDatos.setModel(modelo);
+        }
+        
+        for(Object[] ele:base2){
+            modelo2.addRow(ele);
+        }
+        TablaDatosParti.setModel(modelo);
+        TablaMVP.setModel(modelo2);
     }//GEN-LAST:event_BotonMostrarTablaActionPerformed
 
     private void BotonAñadirDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAñadirDatosActionPerformed
@@ -231,6 +280,43 @@ public class Navegar extends javax.swing.JFrame {
     private void BotonBorrarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBorrarDatosActionPerformed
         BorrarCampo.borrar();
     }//GEN-LAST:event_BotonBorrarDatosActionPerformed
+
+    private void BotonConsultaJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonConsultaJugadorActionPerformed
+        String nombre=JOptionPane.showInputDialog(null,"Introduzca el nombre de la tabla que desea consultar");
+        String condicion=JOptionPane.showInputDialog(null,"Introduzca la condicion de busqueda recuerde que empieza por WHERE en caso de querer consultar todo deje en blanco");
+        String consulta="SELECT ano, mvp,usado FROM \""+nombre+"datos\" "+condicion;
+        ArrayList<Object[]> base=new ArrayList<>();
+        TablaDatosParti.setModel(Consultas.blanco());
+        TablaMVP.setModel(Consultas.blanco2());
+        DefaultTableModel modelo =(DefaultTableModel) TablaMVP.getModel();
+        base=Consultas.selectMVP(consulta);
+        for(Object[] ele:base){
+            modelo.addRow(ele);
+        }
+        TablaMVP.setModel(modelo);
+    }//GEN-LAST:event_BotonConsultaJugadorActionPerformed
+
+    private void ConsultaAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultaAnoActionPerformed
+        TablaDatosParti.setModel(Consultas.blanco());
+        TablaMVP.setModel(Consultas.blanco2());
+        DefaultTableModel modeloMV=(DefaultTableModel) TablaMVP.getModel();
+        DefaultTableModel modeloParti=(DefaultTableModel) TablaDatosParti.getModel();
+        String nombre=JOptionPane.showInputDialog(null,"Introduzca el nombre de la tabla que desea consultar");
+        int ano=Integer.parseInt(JOptionPane.showInputDialog(null,"Introduzca el año por el que desea buscar"));
+        ArrayList<Object[]>mv=new ArrayList<>();
+        ArrayList<Object[]>parti=new ArrayList<>();
+        mv=Consultas.selectAnoMV(ano, nombre);
+        parti=Consultas.selectAnoParti(ano, nombre);
+        for(Object[] ele:mv){
+            modeloMV.addRow(ele);
+        }
+        for(Object[] ele:parti){
+            modeloParti.addRow(ele);
+        }
+        
+        TablaDatosParti.setModel(modeloParti);
+        TablaMVP.setModel(modeloMV);
+    }//GEN-LAST:event_ConsultaAnoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -271,14 +357,18 @@ public class Navegar extends javax.swing.JFrame {
     private javax.swing.JButton BotonAñadirDatos;
     private javax.swing.JButton BotonBorrarDatos;
     private javax.swing.JButton BotonConsulta;
+    private javax.swing.JButton BotonConsultaJugador;
     private javax.swing.JButton BotonCrearTabla;
     private javax.swing.JButton BotonDesconectar;
     private javax.swing.JButton BotonModificarDatos;
     private javax.swing.JButton BotonMostrarTabla;
-    public javax.swing.JTable TablaDatos;
+    private javax.swing.JButton ConsultaAno;
+    public javax.swing.JTable TablaDatosParti;
+    public javax.swing.JTable TablaMVP;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }
