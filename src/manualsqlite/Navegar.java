@@ -111,7 +111,7 @@ public class Navegar extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Ano", "Mejor jugador", "Campeon usado"
+                "Ano", "MVP", "Campeon usado"
             }
         ));
         jScrollPane2.setViewportView(TablaMVP);
@@ -286,7 +286,7 @@ public class Navegar extends javax.swing.JFrame {
 
     private void BotonConsultaJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonConsultaJugadorActionPerformed
         String nombre=JOptionPane.showInputDialog(null,"Introduzca el nombre de la tabla que desea consultar");
-        String condicion=JOptionPane.showInputDialog(null,"Introduzca la condicion de busqueda recuerde que empieza por WHERE en caso de querer consultar todo deje en blanco");
+        String condicion=JOptionPane.showInputDialog(null,"Introduzca la condicion de busqueda recuerde que empieza por WHERE en caso de querer consultar todo deje en blanco\nEn caso de querer buscar por campeon ponga usado como campo");
         String consulta="SELECT ano, mvp,usado FROM \""+nombre+"datos\" "+condicion;
         ArrayList<Object[]> base=new ArrayList<>();
         TablaDatosParti.setModel(Consultas.blanco());
