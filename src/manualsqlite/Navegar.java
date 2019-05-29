@@ -228,6 +228,11 @@ public class Navegar extends javax.swing.JFrame {
     }//GEN-LAST:event_BotonDesconectarActionPerformed
 
     private void BotonConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonConsultaActionPerformed
+        /**
+         *  nombre: String used to select the table
+         *  condicion: String used to add a value to the query
+         *  consulta: String used to realise the query
+         */
         String nombre=JOptionPane.showInputDialog(null,"Introduzca el nombre de la tabla que desea consultar");
         String condicion=JOptionPane.showInputDialog(null,"Introduzca la condicion de busqueda recuerde que empieza por WHERE en caso de querer consultar todo deje en blanco");
         String consulta="SELECT ano, finalista1,finalista2,campeon FROM \""+nombre+"\" "+condicion;
@@ -251,6 +256,10 @@ public class Navegar extends javax.swing.JFrame {
     private void BotonMostrarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonMostrarTablaActionPerformed
         ArrayList<Object[]> base=new ArrayList<>();
         ArrayList<Object[]> base2=new ArrayList<>();
+        /**
+         *  nombre: String used to select the table
+         */
+        
         String nombre=JOptionPane.showInputDialog(null,"De que tabla desea mostrar los datos");
         TablaDatosParti.setModel(Consultas.blanco());
         TablaMVP.setModel(Consultas.blanco2());
@@ -270,21 +279,55 @@ public class Navegar extends javax.swing.JFrame {
     }//GEN-LAST:event_BotonMostrarTablaActionPerformed
 
     private void BotonAñadirDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAñadirDatosActionPerformed
-        Insertar.insert();
+        int total=0;
+        total=Insertar.insert();
+        if(total==2){
+            JOptionPane.showMessageDialog(null,"Insertados datos");
+        }else if (total==1){
+            JOptionPane.showMessageDialog(null,"No insertados los datos en la tabla de mejor jugador\n borre el registro introducido de las finales e introduzca nuevamente los datos");
+        }else{
+            JOptionPane.showMessageDialog(null,"fallo al intentar introducir todos los datos");
+        }
     }//GEN-LAST:event_BotonAñadirDatosActionPerformed
 
     private void BotonModificarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonModificarDatosActionPerformed
+        /**
+         *  nombre: String used to select the table
+         *  ano: int used to implement the value of the query
+         */
         String nombre=JOptionPane.showInputDialog(null,"De que tabla desea modificar los datos");
         int ano=Integer.parseInt(JOptionPane.showInputDialog(null,"Introduce el año del torneo"));
-        Modificar.modificarDatosMV(nombre,ano);
-        Modificar.modificarDatosParti(nombre,ano);
+        int compro1=Modificar.modificarDatosMV(nombre,ano);
+        int compro2=Modificar.modificarDatosParti(nombre,ano);
+        if (compro1==1&&compro2==1){
+            JOptionPane.showMessageDialog(null,"Datos modificados");
+        }else if (compro1==1&&compro2==0){
+            JOptionPane.showMessageDialog(null,"Datos no modificados borre los registros introducidos de finales e introduzca nuevamente los datos");
+        }else {
+            JOptionPane.showMessageDialog(null,"fallo al intentar modificar los datos porfavor realice nuevamente la accion");
+        }
     }//GEN-LAST:event_BotonModificarDatosActionPerformed
 
     private void BotonBorrarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBorrarDatosActionPerformed
-        BorrarCampo.borrar();
+        
+        int compro=BorrarCampo.borrar();
+        if (compro==0){
+            JOptionPane.showMessageDialog(null, "Datos no borrados error en el año o no existe");
+        }else if(compro==1){
+            JOptionPane.showMessageDialog(null,"Datos de las finales borrados pero no se logro borrar los de usuario\nPorfavor cree una final falsa con el año a borrar y repita la accion de borrado");
+        }else {
+            JOptionPane.showMessageDialog(null,"Datos borrados");
+        }
+        
     }//GEN-LAST:event_BotonBorrarDatosActionPerformed
 
     private void BotonConsultaJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonConsultaJugadorActionPerformed
+        /**
+         *  nombre: String used to select the table
+         *  condicion: String used to add a value to the query
+         *  consulta: String used to realise the query
+         */
+        
         String nombre=JOptionPane.showInputDialog(null,"Introduzca el nombre de la tabla que desea consultar");
         String condicion=JOptionPane.showInputDialog(null,"Introduzca la condicion de busqueda recuerde que empieza por WHERE en caso de querer consultar todo deje en blanco\nEn caso de querer buscar por campeon ponga usado como campo");
         String consulta="SELECT ano, mvp,usado FROM \""+nombre+"datos\" "+condicion;
@@ -304,6 +347,10 @@ public class Navegar extends javax.swing.JFrame {
         TablaMVP.setModel(Consultas.blanco2());
         DefaultTableModel modeloMV=(DefaultTableModel) TablaMVP.getModel();
         DefaultTableModel modeloParti=(DefaultTableModel) TablaDatosParti.getModel();
+        /**
+         *  nombre: String used to select the table
+         *  ano: int used to implement the value of the query
+         */
         String nombre=JOptionPane.showInputDialog(null,"Introduzca el nombre de la tabla que desea consultar");
         int ano=Integer.parseInt(JOptionPane.showInputDialog(null,"Introduzca el año por el que desea buscar"));
         ArrayList<Object[]>mv=new ArrayList<>();

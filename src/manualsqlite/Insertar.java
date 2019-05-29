@@ -17,7 +17,13 @@ import javax.swing.JOptionPane;
  */
 public class Insertar {
      
-    public static void insert() {
+    public static int insert() {
+        /*
+        * if contador=0 dont add nothing
+        * else contador=1 only add the first table
+        * else contador=2 add all
+        */
+        int contador=0;
         String url = "jdbc:sqlite:/home/local/DANIELCASTELAO/cromerofajar/Actividades Programación/Manual/campeonato.db";
         String nombre=JOptionPane.showInputDialog(null,"En que tabla desea introducir los datos?");
         Connection conne = null;
@@ -26,6 +32,9 @@ public class Insertar {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+        /*
+        * All this values are used to add the parameters to the insert and create the insert
+        */
         int ano=Integer.parseInt(JOptionPane.showInputDialog(null,"Introduce el año del campeonato"));
         String finalista1=JOptionPane.showInputDialog(null,"Introduce un finalista");
         String finalista2=JOptionPane.showInputDialog(null,"Introduce el otro finalista");
@@ -42,23 +51,23 @@ public class Insertar {
             pstmt.setString(3, finalista2);
             pstmt.setString(4, campeon);
             pstmt.executeUpdate();
-            JOptionPane.showMessageDialog(null,"Insertados datos de la final");
+            contador=1;
         try(Connection conn2=conne;
            PreparedStatement pstmt2 =conn2.prepareStatement(sql2)){
            pstmt2.setInt(1, ano);
            pstmt2.setString(2, mvp);
            pstmt2.setString(3, usado);
            pstmt2.execute();
-           JOptionPane.showMessageDialog(null,"Insertados datos del mejor jugador");
+           contador=2;
         } catch (SQLException e){
             System.out.println(e.getMessage());
-            JOptionPane.showMessageDialog(null,"No insertado algun campo esta mal introducido o se repite el año");
         }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            JOptionPane.showMessageDialog(null,"No insertado algun campo esta mal introducido o se repite el año");
         }
-        
+        finally{
+            return contador;
+        }
 
     }
 }

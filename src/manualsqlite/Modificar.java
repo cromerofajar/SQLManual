@@ -13,7 +13,8 @@ import javax.swing.JOptionPane;
  * @author cromerofajar
  */
 public class Modificar {
-    public static void modificarDatosMV(String nombre,int ano){
+    public static int modificarDatosMV(String nombre,int ano){
+        int compro=0;
         String url = "jdbc:sqlite:/home/local/DANIELCASTELAO/cromerofajar/Actividades Programación/Manual/campeonato.db";
         Connection conne = null;
         try {
@@ -21,6 +22,9 @@ public class Modificar {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+        /*
+        * Variables used to realiced the update
+        */
             String jug=JOptionPane.showInputDialog(null,"Introduzca el nombre del mejor jugador");
             String camp=JOptionPane.showInputDialog(null,"Introduzca el nombre del campeon usado");
             String sql = "UPDATE \""+nombre+"datos\" SET ano= ? ,"
@@ -37,11 +41,11 @@ public class Modificar {
             pstmt.setString(3,camp);
 
             pstmt.executeUpdate();
-            System.out.println("Campo Modificado");
+            compro=1;
             
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            System.out.println("El año no esta en la base de datos");
+            compro=0;
         }finally{
             try {
                 conne.close();
@@ -49,9 +53,10 @@ public class Modificar {
                 Logger.getLogger(Modificar.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        return compro;
     }
-    public static void modificarDatosParti(String nombre,int ano){
-        
+    public static int modificarDatosParti(String nombre,int ano){
+        int compro=0;
         String url = "jdbc:sqlite:/home/local/DANIELCASTELAO/cromerofajar/Actividades Programación/Manual/campeonato.db";
         Connection conne = null;
         try {
@@ -59,7 +64,9 @@ public class Modificar {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-            
+        /*
+        * Variables used to realiced the update
+        */
             String f1=JOptionPane.showInputDialog(null,"Introduzca el nombre del primer finalista");
             String f2=JOptionPane.showInputDialog(null,"Introduzca el nombre del segundo finalista");
             String camp=JOptionPane.showInputDialog(null,"Introduce el nombre del equipo campeon");
@@ -79,11 +86,11 @@ public class Modificar {
             pstmt.setString(4, camp);
 
             pstmt.executeUpdate();
-            System.out.println("Campo Modificado");
+            compro=1;
             
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            System.out.println("El año no esta en la base de datos");
+            compro=0;
         }finally{
             try {
                 conne.close();
@@ -91,5 +98,6 @@ public class Modificar {
                 Logger.getLogger(Modificar.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        return compro;
     }
 }
