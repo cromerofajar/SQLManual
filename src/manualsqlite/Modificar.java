@@ -14,7 +14,12 @@ import javax.swing.JOptionPane;
  */
 public class Modificar {
     public static int modificarDatosMV(String nombre,int ano){
-        int compro=0;
+        /*
+        * if contador=0 dont add nothing
+        * else contador=1 only add the first table
+        * else contador=2 add all
+        */
+        int contador=0;
         String url = "jdbc:sqlite:/home/local/DANIELCASTELAO/cromerofajar/Actividades Programación/Manual/campeonato.db";
         Connection conne = null;
         try {
@@ -41,11 +46,11 @@ public class Modificar {
             pstmt.setString(3,camp);
 
             pstmt.executeUpdate();
-            compro=1;
+            contador=1;
             
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            compro=0;
+            contador=0;
         }finally{
             try {
                 conne.close();
@@ -53,7 +58,7 @@ public class Modificar {
                 Logger.getLogger(Modificar.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        return compro;
+        return contador;
     }
     public static int modificarDatosParti(String nombre,int ano){
         int compro=0;

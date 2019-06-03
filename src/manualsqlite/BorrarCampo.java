@@ -15,7 +15,12 @@ import javax.swing.JOptionPane;
  */
 public class BorrarCampo {
     public static int borrar(){
-        int compro=0;
+        /*
+        * if contador=0 dont add nothing
+        * else contador=1 only add the first table
+        * else contador=2 add all
+        */
+        int contador=0;
         String nombre=JOptionPane.showInputDialog(null,"Introduce el nombre de la tabla de la que deseas borrar un dato");
         String url= "jdbc:sqlite:/home/local/DANIELCASTELAO/cromerofajar/Actividades Programación/Manual/campeonato.db";
         Connection conne = null;
@@ -33,14 +38,14 @@ public class BorrarCampo {
             pstmt.setInt(1, año);
             pstmt.executeUpdate();
             JOptionPane.showMessageDialog(null,"Datos borrados partida");
-            compro=1;
+            contador=1;
         try (Connection conn2 = conne;
                 PreparedStatement pstmt2 = conn.prepareStatement(sql2)) {
 
             pstmt2.setInt(1, año);
             pstmt2.executeUpdate();
             JOptionPane.showMessageDialog(null,"Datos borrados de jugador");
-            compro=2;
+            contador=2;
             conn2.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -56,6 +61,6 @@ public class BorrarCampo {
                 Logger.getLogger(BorrarCampo.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        return compro;
+        return contador;
     }
 }
