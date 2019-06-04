@@ -39,6 +39,7 @@ public class CrearTablas extends javax.swing.JFrame {
         Cancelar = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         cuadroTextoNombreTabla = new javax.swing.JTextField();
+        Torneo = new javax.swing.JButton();
 
         jLabel2.setText("NombreCampo1:");
 
@@ -60,6 +61,13 @@ public class CrearTablas extends javax.swing.JFrame {
 
         jLabel10.setText("Nombre Tabla");
 
+        Torneo.setText("Torneo");
+        Torneo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TorneoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -69,6 +77,8 @@ public class CrearTablas extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(Cancelar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Torneo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Aceptar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -87,7 +97,8 @@ public class CrearTablas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Cancelar)
-                    .addComponent(Aceptar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Aceptar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Torneo))
                 .addContainerGap())
         );
 
@@ -95,9 +106,7 @@ public class CrearTablas extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,34 +119,17 @@ public class CrearTablas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarActionPerformed
-        Navegar obx=new Navegar();
-        String url = "jdbc:sqlite:/home/local/DANIELCASTELAO/cromerofajar/Actividades Programación/Manual/campeonato.db";
-        String sql = "CREATE TABLE IF NOT EXISTS "+ cuadroTextoNombreTabla.getText()+ "(\n"
-                + "ano integer PRIMARY KEY,\n"
-                + "finalista1 text NOT NULL,\n"
-                + "finalista2 text NOT NULL,\n"
-                + "campeon text"
-                + ");";
-        String sql2 = "CREATE TABLE IF NOT EXISTS "+ cuadroTextoNombreTabla.getText()+"datos "+ "(\n"
-                + "ano integer PRIMARY KEY,\n"
-                + "mvp text NOT NULL,\n"
-                + "usado text NOT NULL\n"
-                + ");";
-        try (Connection conn = DriverManager.getConnection(url);
-                Statement stmt = conn.createStatement()) {
-            // create a new table
-            stmt.execute(sql);
-            stmt.execute(sql2);
-            JOptionPane.showMessageDialog(null,"Tabla creada");
+            Navegar obx=new Navegar();
+            int comprobante;
+            comprobante=CrearTablaCodigo.crearPara(cuadroTextoNombreTabla.getText());
+            if(comprobante==1){
+                JOptionPane.showMessageDialog(null,"Creadas las tablas");
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Error al crear las tablas");
+            }
             obx.setVisible(true);
             this.setVisible(false);
-            conn.close();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            obx.setVisible(true);
-            this.setVisible(false);
-            JOptionPane.showMessageDialog(null, "Error al crear tabla");
-        }
     }//GEN-LAST:event_AceptarActionPerformed
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
@@ -145,6 +137,16 @@ public class CrearTablas extends javax.swing.JFrame {
         obx.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_CancelarActionPerformed
+
+    private void TorneoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TorneoActionPerformed
+        String compro=JOptionPane.showInputDialog(null,"Advertencia esto creara las tablas con nombre torneo\n desea seguir?");
+        if(compro.equals("Si")||compro.equals("si")||compro.equals("SI")||compro.equals("sI")){
+            CrearTablaCodigo.crearDefecto();
+            JOptionPane.showMessageDialog(null,"Tablas torneo creadas");
+        }else{
+            JOptionPane.showMessageDialog(null,"Opcion cancelada");
+        }
+    }//GEN-LAST:event_TorneoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -184,6 +186,7 @@ public class CrearTablas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Aceptar;
     private javax.swing.JButton Cancelar;
+    private javax.swing.JButton Torneo;
     private javax.swing.JTextField cuadroTextoNombreTabla;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
