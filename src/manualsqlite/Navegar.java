@@ -311,14 +311,16 @@ public class Navegar extends javax.swing.JFrame {
     }//GEN-LAST:event_BotonModificarDatosActionPerformed
 
     private void BotonBorrarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBorrarDatosActionPerformed
-        
+        /*
+        *compro=Cuenta la cantidad de filas borradas
+        */
         int compro=BorrarCampo.borrar();
         if (compro==0){
             JOptionPane.showMessageDialog(null, "Datos no borrados error en el año o no existe");
         }else if(compro==1){
             JOptionPane.showMessageDialog(null,"Datos de las finales borrados pero no se logro borrar los de usuario\nPorfavor cree una final falsa con el año a borrar y repita la accion de borrado");
         }else {
-            JOptionPane.showMessageDialog(null,"Datos borrados");
+            JOptionPane.showMessageDialog(null,"Datos borrados, Total filas= "+compro);
         }
         
     }//GEN-LAST:event_BotonBorrarDatosActionPerformed
