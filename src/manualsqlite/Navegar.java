@@ -279,10 +279,12 @@ public class Navegar extends javax.swing.JFrame {
     }//GEN-LAST:event_BotonMostrarTablaActionPerformed
 
     private void BotonAñadirDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAñadirDatosActionPerformed
-        int total=0;
+        /*
+        * total= cuenta la cantidad de filas insertadas y devuelve un mensaje segun la cantidad
+        */int total=0;
         total=Insertar.insert();
         if(total==2){
-            JOptionPane.showMessageDialog(null,"Insertados datos");
+            JOptionPane.showMessageDialog(null,"Insertados datos, cantidad= "+total);
         }else if (total==1){
             JOptionPane.showMessageDialog(null,"No insertados los datos en la tabla de mejor jugador\n borre el registro introducido de las finales e introduzca nuevamente los datos");
         }else{
