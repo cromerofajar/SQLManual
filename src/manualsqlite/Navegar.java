@@ -302,7 +302,7 @@ public class Navegar extends javax.swing.JFrame {
         int compro1=Modificar.modificarDatosMV(nombre,ano);
         int compro2=Modificar.modificarDatosParti(nombre,ano);
         if (compro1==1&&compro2==1){
-            JOptionPane.showMessageDialog(null,"Datos modificados, total modificados= "+compro1+compro2);
+            JOptionPane.showMessageDialog(null,"Datos modificados, total modificados= "+(compro1+compro2));
         }else if (compro1==1&&compro2==0){
             JOptionPane.showMessageDialog(null,"Datos no modificados borre los registros introducidos de finales e introduzca nuevamente los datos");
         }else {
